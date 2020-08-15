@@ -14,7 +14,7 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3.select(".chart")
+var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -26,11 +26,10 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(function(data){
     console.log(data)
 
-
         // Step 1: Parse Data/Cast as numbers
         data.forEach(function(data) {
-            data.poverty = +data.poverty;
-            data.healthcareLow = +data.healthcareLow;
+            data.age = +data.age;
+            data.smokes = +data.smokes;
             data.abbr = data.abbr;
         });
         
@@ -78,7 +77,6 @@ d3.csv("assets/data/data.csv").then(function(data){
         .attr("font-size", 8)
         .style("text-anchor", "middle");
 
-
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
@@ -93,13 +91,12 @@ d3.csv("assets/data/data.csv").then(function(data){
     chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
-        .text("Age(Median)")
+        .text("Age (Median)")
         .attr("font-weight", 900)
         .attr("font-size", 20);
     }).catch(function(error) {
         console.log(error);
     });
-
 
     // Initialize Tooltip
     var toolTip = d3.tip()
@@ -122,4 +119,5 @@ d3.csv("assets/data/data.csv").then(function(data){
     .on("mouseout", function(d) {
         toolTip.hide(d);
     });
+
 
