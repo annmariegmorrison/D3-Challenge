@@ -37,11 +37,11 @@ d3.csv("assets/data/data.csv").then(function(data){
         // Step 2: Create scale functions
 
         var xLinearScale = d3.scaleLinear()
-            .domain([30, d3.max(Data, d => d.age)])
+            .domain([30, d3.max(data, d => d.age)])
             .range([0, width]);
   
         var yLinearScale = d3.scaleLinear()
-            .domain([8, d3.max(Data, d => d.smokes)])
+            .domain([8, d3.max(data, d => d.smokes)])
             .range([height, 0]);
 
         // Step 3: Create axis functions
@@ -58,7 +58,7 @@ d3.csv("assets/data/data.csv").then(function(data){
 
         // Step 5: Create circles
         var circlesGroup = chartGroup.selectAll("circle")
-        .data(Data)
+        .data(data)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d.age))
@@ -68,7 +68,7 @@ d3.csv("assets/data/data.csv").then(function(data){
         // .attr("opacity", ".5");
     
         var text = chartGroup.selectAll()
-        .data(Data)
+        .data(data)
         .enter()
         .append("text")
         .attr("dx", d => xLinearScale(d.age))
