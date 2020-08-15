@@ -28,8 +28,8 @@ d3.csv("assets/data/data.csv").then(function(data){
 
         // Step 1: Parse Data/Cast as numbers
         data.forEach(function(data) {
-            data.age = +data.age;
-            data.smokes = +data.smokes;
+            data.age= +data.age;
+            data.poverty = +data.poverty;
             data.abbr = data.abbr;
         });
         
@@ -40,7 +40,7 @@ d3.csv("assets/data/data.csv").then(function(data){
             .range([0, width]);
   
         var yLinearScale = d3.scaleLinear()
-            .domain([8, d3.max(data, d => d.smokes)])
+            .domain([8, d3.max(data, d => d.poverty)])
             .range([height, 0]);
 
         // Step 3: Create axis functions
@@ -61,7 +61,7 @@ d3.csv("assets/data/data.csv").then(function(data){
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d.age))
-        .attr("cy", d => yLinearScale(d.smokes))
+        .attr("cy", d => yLinearScale(d.poverty))
         .attr("r", "10")
         .attr("fill", "#98ceeb")
         // .attr("opacity", ".5");
@@ -71,7 +71,7 @@ d3.csv("assets/data/data.csv").then(function(data){
         .enter()
         .append("text")
         .attr("dx", d => xLinearScale(d.age))
-        .attr("dy", d => yLinearScale(d.smokes))
+        .attr("dy", d => yLinearScale(d.poverty))
         .text(d => (d.abbr))
         .attr("fill", "white")
         .attr("font-size", 8)
@@ -84,7 +84,7 @@ d3.csv("assets/data/data.csv").then(function(data){
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "axisText")
-        .text("Smokes (%)")
+        .text("Poverty (%)")
         .attr("font-weight", 900)
         .attr("font-size", 20);
   
